@@ -1,4 +1,4 @@
-const App = (): JSX.Element => {
+function App(): JSX.Element {
   return (
     <div>
       <h1 className="orange">React Advanced</h1>
@@ -7,4 +7,4 @@ const App = (): JSX.Element => {
   );
 };
 
-export default App
+export default App;
