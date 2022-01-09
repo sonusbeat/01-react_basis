@@ -1,31 +1,32 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { gsap } from "gsap";
 
-const MAXIMUM_COUNT = 20;
-const initialValue = 15;
+type HooksProps = {
+  initialValue?: number;
+  maxCount?: number;
+};
 
-const useCounter = () => {
+const useCounter = ({ initialValue = 15, maxCount = 10 }: HooksProps) => {
   const [ counter, setCounter ] = useState( initialValue );
-  const counterElement = useRef<HTMLHeadingElement>( null );
+  const elementToAnimate = useRef<any>( null );
+
+  const timelineRef = useRef( gsap.timeline() );
+
+  useLayoutEffect(() => {
+    if( !elementToAnimate.current ) return;
+    
+    timelineRef.current
+      .to( elementToAnimate.current, { y: -10, duration: 0.2, ease: "ease.out" } )
+      .to( elementToAnimate.current, { y: 0, duration: 0.5, ease: "bounce.out" } )
+      .pause();
+  }, []);
 
   useEffect(() => {
-    if ( counter < 20 ) return undefined;
-
-    console.log(
-      "%cCounter reached maximum value",
-      "color: yellow; background-color: #111; padding: 5px;"
-    );
-
-    const timeline = gsap.timeline();
-
-    timeline
-      .to( counterElement.current, { y: -15, duration: 0.2, ease: "ease.out" } )
-      .to( counterElement.current, { y: 0, duration: 0.5, ease: "bounce.out" } );
-
+    timelineRef.current.play( 0 );
   }, [ counter ]);
 
   const handleIncrement = (): void => {
-    setCounter( previous => Math.min( previous + 1, MAXIMUM_COUNT ) );
+    setCounter( previous => Math.min( previous + 1, maxCount ) );
   };
 
   const handleReset = (): void => {
@@ -38,7 +39,7 @@ const useCounter = () => {
 
   return {
     counter,
-    counterElement,
+    elementToAnimate,
     handleIncrement,
     handleDecrement,
     handleReset

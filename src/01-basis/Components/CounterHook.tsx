@@ -3,17 +3,20 @@ const CounterHook = (): JSX.Element => {
 
   const {
     counter,
-    counterElement,
+    elementToAnimate,
     handleIncrement,
     handleDecrement,
     handleReset
-  } = useCounter();
+  } = useCounter({
+    initialValue: 15,
+    maxCount: 20
+  });
 
   return (
     <>
       <hgroup className="text-center">
         <h1 className="green display-1">Counter Hook</h1>
-        <h2 ref={ counterElement } className="purple display-2">{ counter }</h2>
+        <h2 ref={ elementToAnimate } className="purple display-2">{ counter }</h2>
       </hgroup>
       <hr />
 
