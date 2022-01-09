@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { gsap } from "gsap";
 
 const CounterEffect = (): JSX.Element => {
   const initialValue = 10;
@@ -12,6 +13,10 @@ const CounterEffect = (): JSX.Element => {
       "%cCounter reached maximum value",
       "color: yellow; background-color: #111; padding: 5px;"
     );
+
+    gsap.to("h2", { y: -15, duration: 0.2, ease: "ease.out" }).then(() => {
+      gsap.to("h2", { y: 0, duration: 0.5, ease: "bounce.out" })
+    });
 
   }, [ counter ]);
 
@@ -29,7 +34,10 @@ const CounterEffect = (): JSX.Element => {
 
   return (
     <>
-      <h1 className="text-center green display-1">Counter Effect: { counter }</h1>
+      <hgroup className="text-center">
+        <h1 className="green display-1">Counter Effect</h1>
+        <h2 className="purple display-2">{ counter }</h2>
+      </hgroup>
       <hr />
 
       <section className="text-center mt-4">
