@@ -4,13 +4,16 @@ interface Props {
   initialValue?: number;
 }
 
+interface CounterState {
+  counter: number;
+  clicks: number;
+}
+
 const CounterBy = ({ initialValue = 10 }: Props): JSX.Element => {
-  const [ counterState, setCounterState ] = useState({
+  const [{ counter, clicks }, setCounterState ] = useState<CounterState>({
     counter: initialValue,
     clicks: 0
   });
-
-  const { counter, clicks } = counterState;
 
   const handleIncrement = ( value: number ): void => {
     setCounterState( ({ counter, clicks }) => ({
@@ -20,7 +23,7 @@ const CounterBy = ({ initialValue = 10 }: Props): JSX.Element => {
   };
 
   const handleReset = (): void => {
-    setCounterState(({ counter, clicks }) => ({
+    setCounterState(() => ({
       counter: initialValue,
       clicks: 0
     }));
@@ -42,15 +45,16 @@ const CounterBy = ({ initialValue = 10 }: Props): JSX.Element => {
       <hr />
 
       <section className="text-center mt-4">
+
         <button
           className="btn btn-outline-primary me-3"
-          onClick={ () => handleIncrement( 1 ) }
-        >+</button>
+          onClick={ () => handleIncrement( 10 ) }
+        >+ 10</button>
 
         <button
           className="btn btn-outline-primary"
-          onClick={ () => handleIncrement( 10 ) }
-        >+ 10</button>
+          onClick={ () => handleIncrement( 1 ) }
+        >+</button>
 
         <button
           className="btn btn-outline-primary mx-3"

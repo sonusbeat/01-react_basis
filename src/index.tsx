@@ -10,7 +10,6 @@ import './index.css';
 ReactDOM.render(
   <React.StrictMode>
     <>
-      <Counter /><br />
       <CounterBy />
     </>
   </React.StrictMode>,
