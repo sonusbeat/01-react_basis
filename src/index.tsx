@@ -4,11 +4,15 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import Counter from './01-basis/Components/Counter';
+import CounterBy from './01-basis/Components/CounterBy';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Counter initialValue={ 100 } />
+    <>
+      <Counter /><br />
+      <CounterBy />
+    </>
   </React.StrictMode>,
   document.getElementById('root')
 );
