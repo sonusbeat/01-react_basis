@@ -10,6 +10,8 @@ ReactDOM.render(
   <React.StrictMode>
     <>
       <CounterEffect />
+      <div className="mb-5"></div>
+      <CounterEffect />
     </>
   </React.StrictMode>,
   document.getElementById('root')

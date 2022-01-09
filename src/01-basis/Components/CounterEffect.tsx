@@ -1,22 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 const CounterEffect = (): JSX.Element => {
-  const initialValue = 10;
+  const initialValue = 15;
   const MAXIMUM_COUNT = 20;
   const [ counter, setCounter ] = useState( initialValue );
+  const counterElement = useRef<HTMLHeadingElement>( null );
 
   useEffect(() => {
-    if (counter < 20) return undefined;
+    if ( counter < 20 ) return undefined;
 
     console.log(
       "%cCounter reached maximum value",
       "color: yellow; background-color: #111; padding: 5px;"
     );
 
-    gsap.to("h2", { y: -15, duration: 0.2, ease: "ease.out" }).then(() => {
-      gsap.to("h2", { y: 0, duration: 0.5, ease: "bounce.out" })
-    });
+    const timeline = gsap.timeline();
+
+    timeline
+      .to( counterElement.current, { y: -15, duration: 0.2, ease: "ease.out" } )
+      .to( counterElement.current, { y: 0, duration: 0.5, ease: "bounce.out" } );
 
   }, [ counter ]);
 
@@ -36,7 +39,7 @@ const CounterEffect = (): JSX.Element => {
     <>
       <hgroup className="text-center">
         <h1 className="green display-1">Counter Effect</h1>
-        <h2 className="purple display-2">{ counter }</h2>
+        <h2 ref={ counterElement } className="purple display-2">{ counter }</h2>
       </hgroup>
       <hr />
 
