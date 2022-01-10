@@ -5,14 +5,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import './index.css';
 import CounterHook from './01-basis/Components/CounterHook';
+import CounterReducerComponent from './01-basis/Components/CounterReducerComponent';
 
 ReactDOM.render(
   <React.StrictMode>
-    <>
-      <CounterHook />
-      <div className="mb-5"></div>
-      <CounterHook />
-    </>
+    <CounterReducerComponent />
   </React.StrictMode>,
   document.getElementById('root')
 );
